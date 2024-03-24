@@ -1,0 +1,75 @@
+Selecting Data from a Table:
+
+sql
+Copy code
+SELECT column1, column2 FROM table_name;
+Filtering Rows with WHERE Clause:
+
+sql
+Copy code
+SELECT * FROM table_name WHERE condition;
+Sorting Data with ORDER BY:
+
+sql
+Copy code
+SELECT * FROM table_name ORDER BY column_name;
+Grouping Data with GROUP BY:
+
+sql
+Copy code
+SELECT column1, COUNT(*) FROM table_name GROUP BY column1;
+Joining Tables with INNER JOIN:
+
+sql
+Copy code
+SELECT table1.column1, table2.column2 
+FROM table1
+INNER JOIN table2 ON table1.common_column = table2.common_column;
+Inserting Data into a Table:
+
+sql
+Copy code
+INSERT INTO table_name (column1, column2) VALUES (value1, value2);
+Updating Data in a Table:
+
+sql
+Copy code
+UPDATE table_name SET column1 = new_value WHERE condition;
+Deleting Data from a Table:
+
+sql
+Copy code
+DELETE FROM table_name WHERE condition;
+Creating a New Table:
+
+sql
+Copy code
+CREATE TABLE new_table (
+    column1 datatype,
+    column2 datatype,
+    ...
+);
+Dropping a Table:
+
+sql
+Copy code
+DROP TABLE table_name;
+
+
+
+
+
+
+def print_pattern():
+    for i in range(5):
+        for j in range(5):
+            if i == 1 and (j == 1 or j == 3):
+                print(".", end=" ")
+            elif i == 3 and (j == 1 or j == 3):
+                print(".", end=" ")
+            else:
+                print(" ", end=" ")
+        print()
+
+
+print_pattern()

@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    </head>
+<style>
+    body {
+        background: -webkit-linear-gradient(bottom, #3eb0b4, white);
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center; /* Center the form horizontally */
+        align-items: center; /* Center the form vertically */
+        height: 100vh; /* Set the body height to the full viewport height */
+    }
+    .form-container {
+        max-width: 400px;
+        padding: 20px;
+        border: 1px solid #7ecdcf;
+        border-radius: 5px;
+        background-color: rgb(226, 247, 245);
+        text-align: center; /* Center the form fields */
+        box-sizing: border-box; /* Ensure padding is included in max-width calculation */
+    }
+
+    .form-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Centering the register button */
+    .form-container button[type="submit"] {
+        margin: 20px auto 0; /* Add this line to center the button horizontally */
+        display: block; /* Ensure the button is displayed as a block element */
+        width: 9em; /* Set the width of the button */
+        height: 3em; /* Set the height of the button */
+        border-radius: 30em; /* Set the border radius */
+        font-size: 15px;
+        font-family: inherit;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        box-shadow: 6px 6px 12px black, -6px -6px 12px darkcyan;
+    }
+
+    .form-container button[type="submit"]::before {
+        content: '';
+        width: 0;
+        height: 3em;
+        border-radius: 30em;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: linear-gradient(to right, darkcyan 10%, white 100%);
+        transition: .5s ease;
+        display: block;
+        z-index: -1;
+    }
+
+    .form-container button[type="submit"]:hover::before {
+        width: 9em;
+    }
+
+    button {
+    width: 7em; /* Decreased width */
+    height: 2.5em; /* Adjusted height */
+    border-radius: 30em;
+    font-size: 15px;
+    font-family: inherit;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 6px 6px 12px black, -6px -6px 12px darkcyan;
+}
+
+button::before {
+    content: '';
+    width: 0;
+    height: 2.5em; /* Adjusted height */
+    border-radius: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, darkcyan 10%, white 100%);
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
+
+button:hover::before {
+    width: 7em; /* Adjusted width */
+}
+</style>
+
+
+<body>
+    <form method="post" action="{% url 'add_person' %}">
+        {% csrf_token %}
+        <h1>Create Profile</h1><hr>
+        <label>id</label>
+        <input type="number" name="id" value="{{all_person.id}}" readonly><br><br>
+
+        <label>name</label>
+        <input type="text" name="name" value="{{all_person.name}}" required><br><br>
+
+        <label>email</label>
+        <input type="email" name="email" value="{{all_person.email}}" required><br><br>
+
+        <label>bio</label>
+        <input type="text" name="bio" value="{{all_person.bio}}" required><br><br>
+
+        <label> birth_date</label>
+        <input type="date" name="birth_date" value="{{all_person.birth_date|date:'Y-m-d'}}" required><br><br>
+
+        <label>phone</label>
+        <input type="number" name="phone" value="{{all_person.phone}}" required><br><br>
+
+        <label for="gender">Gender</label>
+        <select name="gender" id="gender" required>
+            <option value="male" {% if all_person.gender == 'male' %} selected {% endif %}>Male</option>
+            <option value="female" {% if all_person.gender == 'female' %} selected {% endif %}>Female</option>
+            <option value="other" {% if all_person.gender == 'other' %} selected {% endif %}>Other</option>
+        </select><br><br>
+        {% if all_person.id %}
+            <button type="submit">Update</button>
+        {% else %}  
+            <button type="submit">Create</button>
+        {% endif %}
+        
+    </form>
+</body>
+</html>

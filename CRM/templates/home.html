@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <h1>PERSON</h1><hr>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <style>
+        .person-card {
+    background-color: rgb(226, 247, 245);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 20px;
+    max-width: 300px; 
+    width: calc(75% - 30px); 
+}
+
+button {
+    width: 7em; 
+    height: 2.5em;
+    border-radius: 30em;
+    font-size: 15px;
+    font-family: inherit;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 6px 6px 12px black, -6px -6px 12px darkcyan;
+}
+
+button::before {
+    content: '';
+    width: 0;
+    height: 2.5em; 
+    border-radius: 30em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, darkcyan 10%, white 100%);
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
+
+button:hover::before {
+    width: 7em; 
+}
+
+        </style>
+
+<div class="row">
+    <form id="addPersonForm" method="get" action="{% url 'add_person' %}">
+        <button type="submit">Create Profile</button>
+        <button type="submit" formaction="{% url 'logout' %}">Log Out</button>
+        </form>
+        {% for person in persons %}
+        <div class="col-md-4">
+            <div class="person-card">
+                <h2>{{ person.name }}</h2>
+                <p><strong>ID:</strong> {{ person.id }}</p>
+                <p><strong>Email:</strong> {{ person.email }}</p>
+                <p><strong>Bio:</strong> {{ person.bio }}</p>
+                <p><strong>Birth Date:</strong> {{ person.birth_date }}</p>
+                <p><strong>Phone:</strong> {{ person.phone }}</p>
+                <p><strong>Gender:</strong> {{ person.gender }}</p>
+                <form id="viewPersonForm" method="get" action="{% url 'view_person' person.email %}">
+                    <button type="submit">View Details</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
